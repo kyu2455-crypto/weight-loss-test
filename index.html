@@ -1,29 +1,103 @@
-<script>
-  function calculateLoss() {
-    const original = parseFloat(document.getElementById("originalWeight").value);
-    const current = parseFloat(document.getElementById("currentWeight").value);
-    const errorEl = document.getElementById("error");
-    const resultEl = document.getElementById("result");
-
-    errorEl.textContent = "";
-    resultEl.style.display = "none";
-
-    if (isNaN(original) || isNaN(current) || original <= 0 || current <= 0) {
-      errorEl.textContent = "올바른 몸무게를 입력해주세요.";
-      return;
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>체중 감량 퍼센트 계산기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 40px 20px;
     }
 
-    const diff = current - original;
-    const percent = (Math.abs(diff) / original) * 100;
-
-    if (diff < 0) {
-      resultEl.textContent = `${Math.abs(diff).toFixed(1)}kg 감량, 원래 몸무게 대비 ${percent.toFixed(2)}% 감량했습니다.`;
-    } else if (diff > 0) {
-      resultEl.textContent = `${diff.toFixed(1)}kg 증가, 원래 몸무게 대비 ${percent.toFixed(2)}% 증가했습니다.`;
-    } else {
-      resultEl.textContent = "몸무게 변화가 없습니다.";
+    .card {
+      max-width: 420px;
+      margin: 0 auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
-    resultEl.style.display = "block";
-  }
-</script>
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 16px;
+      background: #eef4ff;
+      border-radius: 10px;
+      font-size: 18px;
+      text-align: center;
+      white-space: pre-line;
+    }
+
+    .error {
+      color: #d32f2f;
+      margin-top: 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>체중 변화 퍼센트 계산기</h1>
+
+    <label for="originalWeight">원래 몸무게 (kg)</label>
+    <input type="number" id="originalWeight" placeholder="예: 80" />
+
+    <label for="currentWeight">현재 몸무게 (kg)</label>
+    <input type="number" id="currentWeight" placeholder="예: 72" />
+
+    <button onclick="calculateChange()">계산하기</button>
+
+    <div id="error" class="error"></div>
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    function calculateChange() {
+      const original = parseFloat(document.getElementById("originalWeight").value);
+      const current = parseFloat(document.getElementById("currentWeight").value);
+      const errorEl = document.getElementById("error");
+      const resultEl = document.getElementById("result");
+
+      errorEl.textContent = "";
+      re
