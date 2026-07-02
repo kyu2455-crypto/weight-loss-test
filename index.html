@@ -67,6 +67,8 @@
       font-size: 18px;
       text-align: center;
       white-space: pre-line;
+      line-height: 1.5;
+      word-break: keep-all;
     }
 
     .error {
@@ -114,13 +116,13 @@
       if (diff < 0) {
         resultEl.textContent =
           absDiff.toFixed(1) + "kg 감량\n" +
-          "원래 몸무게 대비 " + percent.toFixed(2) + "% 감량했습니다.";
+          "기준 대비 " + percent.toFixed(2) + "% 감소";
       } else if (diff > 0) {
         resultEl.textContent =
           absDiff.toFixed(1) + "kg 증가\n" +
-          "원래 몸무게 대비 " + percent.toFixed(2) + "% 증가했습니다.";
+          "기준 대비 " + percent.toFixed(2) + "% 증가";
       } else {
-        resultEl.textContent = "몸무게 변화가 없습니다.";
+        resultEl.textContent = "몸무게 변화 없음";
       }
 
       resultEl.style.display = "block";
