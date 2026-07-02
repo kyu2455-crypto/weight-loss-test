@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>체중 감량 퍼센트 계산기</title>
+  <title>체중 변화 퍼센트 계산기</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -86,7 +86,7 @@
     <label for="currentWeight">현재 몸무게 (kg)</label>
     <input type="number" id="currentWeight" placeholder="예: 72" />
 
-    <button onclick="calculateChange()">계산하기</button>
+    <button type="button" onclick="calculateChange()">계산하기</button>
 
     <div id="error" class="error"></div>
     <div id="result" class="result" style="display:none;"></div>
@@ -100,4 +100,31 @@
       const resultEl = document.getElementById("result");
 
       errorEl.textContent = "";
-      re
+      resultEl.style.display = "none";
+
+      if (isNaN(original) || isNaN(current) || original <= 0 || current <= 0) {
+        errorEl.textContent = "올바른 몸무게를 입력해주세요.";
+        return;
+      }
+
+      const diff = current - original;
+      const absDiff = Math.abs(diff);
+      const percent = (absDiff / original) * 100;
+
+      if (diff < 0) {
+        resultEl.textContent =
+          absDiff.toFixed(1) + "kg 감량\n" +
+          "원래 몸무게 대비 " + percent.toFixed(2) + "% 감량했습니다.";
+      } else if (diff > 0) {
+        resultEl.textContent =
+          absDiff.toFixed(1) + "kg 증가\n" +
+          "원래 몸무게 대비 " + percent.toFixed(2) + "% 증가했습니다.";
+      } else {
+        resultEl.textContent = "몸무게 변화가 없습니다.";
+      }
+
+      resultEl.style.display = "block";
+    }
+  </script>
+</body>
+</html>
